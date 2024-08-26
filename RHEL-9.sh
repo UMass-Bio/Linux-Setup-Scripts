@@ -155,7 +155,7 @@ sudo systemctl enable fstrim.timer
     sudo dnf install -y fwupd
     echo 'UriSchemes=file;https' | sudo tee -a /etc/fwupd/fwupd.conf
     sudo systemctl restart fwupd
-    mkdir -p /etc/systemd/system/fwupd-refresh.service.d
+    sudo mkdir -p /etc/systemd/system/fwupd-refresh.service.d
     unpriv curl -s https://raw.githubusercontent.com/UMass-Bio/Linux-Setup-Scripts/main/etc/systemd/system/fwupd-refresh.service.d/override.conf | sudo tee /etc/systemd/system/fwupd-refresh.service.d/override.conf > /dev/null
     sudo chmod 644 /etc/systemd/system/fwupd-refresh.service.d/override.conf
     sudo systemctl daemon-reload
