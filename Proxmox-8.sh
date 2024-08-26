@@ -8,6 +8,9 @@ output(){
     printf '\e[1;34m%-6s\e[m\n' "${@}"
 }
 
+# Set system time
+sudo timedatectl set-timezone America/New_York
+
 # Compliance and updates
 systemctl mask debug-shell.service
 

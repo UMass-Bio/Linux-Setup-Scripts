@@ -14,6 +14,9 @@ unpriv(){
 
 virtualization=$(systemd-detect-virt)
 
+# Set system time
+sudo timedatectl set-timezone America/New_York
+
 # Compliance and updates
 sudo systemctl mask debug-shell.service
 

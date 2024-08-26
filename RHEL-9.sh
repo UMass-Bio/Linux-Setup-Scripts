@@ -10,6 +10,9 @@ unpriv(){
     sudo -u nobody "$@"
 }
 
+# Set system time
+sudo timedatectl set-timezone America/New_York
+
 virtualization=$(systemd-detect-virt)
 
 # Compliance
