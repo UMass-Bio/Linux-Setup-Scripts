@@ -30,8 +30,6 @@ virtualization=$(systemd-detect-virt)
 
 # Compliance and updates
 sudo systemctl mask debug-shell.service
-echo 'Authorized uses only. All activity may be monitored and reported.' | sudo tee /etc/issue
-echo 'Authorized uses only. All activity may be monitored and reported.' | sudo tee /etc/issue.net
 
 # Setting umask to 077
 umask 077
@@ -51,8 +49,6 @@ sudo chmod 644 /etc/chrony/chrony.conf
 sudo systemctl restart chronyd
 
 # Harden SSH
-unpriv curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/sshd_config.d/10-custom.conf | sudo tee /etc/ssh/sshd_config.d/10-custom.conf > /dev/null
-sudo chmod 644 /etc/ssh/sshd_config.d/10-custom.conf
 unpriv curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/ssh_config.d/10-custom.conf | sudo tee /etc/ssh/ssh_config.d/10-custom.conf > /dev/null
 sudo chmod 644 /etc/ssh/ssh_config.d/10-custom.conf
 sudo mkdir -p /etc/systemd/system/sshd.service.d/

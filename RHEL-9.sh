@@ -52,8 +52,6 @@ sudo systemctl restart chronyd
 sudo /usr/bin/sed -i 's/\s+nullok//g' /etc/pam.d/system-auth
 
 # Harden SSH
-unpriv curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/sshd_config.d/10-custom.conf | sudo tee /etc/ssh/sshd_config.d/10-custom.conf > /dev/null
-sudo chmod 644 /etc/ssh/sshd_config.d/10-custom.conf
 unpriv curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/ssh_config.d/10-custom.conf | sudo tee /etc/ssh/ssh_config.d/10-custom.conf > /dev/null
 sudo chmod 644 /etc/ssh/ssh_config.d/10-custom.conf
 sudo mkdir -p /etc/systemd/system/sshd.service.d/
@@ -205,12 +203,6 @@ unpriv curl -s https://gitlab.com/divested/brace/-/raw/master/brace/usr/lib/syst
 sudo chmod 644 /etc/systemd/system/irqbalance.service.d/99-brace.conf
 sudo systemctl daemon-reload
 sudo systemctl restart irqbalance
-
-# Setup notices
-unpriv curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/issue | sudo tee /etc/issue > /dev/null
-sudo chmod 644 /etc/issue
-unpriv curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/issue | sudo tee /etc/issue.net > /dev/null
-sudo chmod 644 /etc/issue.net
 
 # Final notes to the user
 output 'Server setup complete. To use unbound for DNS, you need to run the following commands:'
