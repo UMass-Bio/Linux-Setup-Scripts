@@ -49,7 +49,7 @@ sudo chmod 644 /etc/chrony/chrony.conf
 sudo systemctl restart chronyd
 
 # Harden SSH
-unpriv curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/ssh_config.d/10-custom.conf | sudo tee /etc/ssh/ssh_config.d/10-custom.conf > /dev/null
+unpriv curl -s https://raw.githubusercontent.com/UMass-Bio/Linux-Setup-Scripts/main/etc/ssh/ssh_config.d/10-custom.conf | sudo tee /etc/ssh/ssh_config.d/10-custom.conf > /dev/null
 sudo chmod 644 /etc/ssh/ssh_config.d/10-custom.conf
 sudo mkdir -p /etc/systemd/system/sshd.service.d/
 sudo chmod 755 /etc/systemd/system/sshd.service.d/
@@ -61,7 +61,7 @@ sudo systemctl restart ssh
 # Security kernel settings
 unpriv curl -s https://raw.githubusercontent.com/secureblue/secureblue/live/files/system/etc/modprobe.d/blacklist.conf | sudo tee /etc/modprobe.d/server-blacklist.conf > /dev/null
 sudo chmod 644 /etc/modprobe.d/server-blacklist.conf
-unpriv curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/sysctl.d/99-server.conf | sudo tee /etc/sysctl.d/99-server.conf > /dev/null
+unpriv curl -s https://raw.githubusercontent.com/UMass-Bio/Linux-Setup-Scripts/main/etc/sysctl.d/99-server.conf | sudo tee /etc/sysctl.d/99-server.conf > /dev/null
 sudo chmod 644 /etc/sysctl.d/99-server.conf
 sudo sysctl -p
 
@@ -69,11 +69,11 @@ sudo sysctl -p
 sudo update-initramfs -u
 
 # Disable coredump
-unpriv curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/security/limits.d/30-disable-coredump.conf | sudo tee /etc/security/limits.d/30-disable-coredump.conf > /dev/null
+unpriv curl -s https://raw.githubusercontent.com/UMass-Bio/Linux-Setup-Scripts/main/etc/security/limits.d/30-disable-coredump.conf | sudo tee /etc/security/limits.d/30-disable-coredump.conf > /dev/null
 sudo chmod 644 /etc/security/limits.d/30-disable-coredump.conf
 sudo mkdir -p /etc/systemd/coredump.conf.d
 sudo chmod 755 /etc/systemd/coredump.conf.d
-unpriv curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/systemd/coredump.conf.d/disable.conf | sudo tee /etc/systemd/coredump.conf.d/disable.conf > /dev/null
+unpriv curl -s https://raw.githubusercontent.com/UMass-Bio/Linux-Setup-Scripts/main/etc/systemd/coredump.conf.d/disable.conf | sudo tee /etc/systemd/coredump.conf.d/disable.conf > /dev/null
 sudo chmod 644 /etc/systemd/coredump.conf.d/disable.conf
 
 # Update GRUB config
@@ -89,7 +89,7 @@ sudo systemctl mask apport.service
 
 ## Avoid phased updates
 sudo apt install -y curl
-unpriv curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/apt/apt.conf.d/99sane-upgrades | sudo tee /etc/apt/apt.conf.d/99sane-upgrades > /dev/null
+unpriv curl -s https://raw.githubusercontent.com/UMass-Bio/Linux-Setup-Scripts/main/etc/apt/apt.conf.d/99sane-upgrades | sudo tee /etc/apt/apt.conf.d/99sane-upgrades > /dev/null
 sudo chmod 644 /etc/apt/apt.conf.d/99sane-upgrades
 
 sudo apt update -y
@@ -125,7 +125,7 @@ if [ "$virtualization" = 'none' ]; then
     echo 'UriSchemes=file;https' | sudo tee -a /etc/fwupd/fwupd.conf
     sudo systemctl restart fwupd
     mkdir -p /etc/systemd/system/fwupd-refresh.service.d
-    unpriv curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/systemd/system/fwupd-refresh.service.d/override.conf | sudo tee /etc/systemd/system/fwupd-refresh.service.d/override.conf > /dev/null
+    unpriv curl -s https://raw.githubusercontent.com/UMass-Bio/Linux-Setup-Scripts/main/etc/systemd/system/fwupd-refresh.service.d/override.conf | sudo tee /etc/systemd/system/fwupd-refresh.service.d/override.conf > /dev/null
     sudo chmod 644 /etc/systemd/system/fwupd-refresh.service.d/override.conf
     sudo systemctl daemon-reload
     sudo systemctl enable --now fwupd-refresh.timer
@@ -178,7 +178,7 @@ forward-zone:
 sudo chmod 644 /etc/unbound/unbound.conf.d/custom.conf
 
 sudo mkdir -p /etc/systemd/system/unbound.service.d
-unpriv curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/systemd/system/unbound.service.d/override-chroot.conf | sudo tee /etc/systemd/system/unbound.service.d/override.conf > /dev/null
+unpriv curl -s https://raw.githubusercontent.com/UMass-Bio/Linux-Setup-Scripts/main/etc/systemd/system/unbound.service.d/override-chroot.conf | sudo tee /etc/systemd/system/unbound.service.d/override.conf > /dev/null
 sudo chmod 644 /etc/systemd/system/unbound.service.d/override.conf
 
 sudo systemctl daemon-reload

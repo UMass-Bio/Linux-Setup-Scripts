@@ -43,7 +43,7 @@ sudo chmod 700 /home/*
 sudo dnf install -y chrony
 unpriv curl -s https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/chrony.conf | sudo tee /etc/chrony.conf > /dev/null
 sudo chmod 644 /etc/chrony.conf
-unpriv curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/sysconfig/chronyd | sudo tee /etc/sysconfig/chronyd > /dev/null
+unpriv curl -s https://raw.githubusercontent.com/UMass-Bio/Linux-Setup-Scripts/main/etc/sysconfig/chronyd | sudo tee /etc/sysconfig/chronyd > /dev/null
 sudo chmod 644 /etc/sysconfig/chronyd
 
 sudo systemctl restart chronyd
@@ -52,7 +52,7 @@ sudo systemctl restart chronyd
 sudo /usr/bin/sed -i 's/\s+nullok//g' /etc/pam.d/system-auth
 
 # Harden SSH
-unpriv curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/ssh_config.d/10-custom.conf | sudo tee /etc/ssh/ssh_config.d/10-custom.conf > /dev/null
+unpriv curl -s https://raw.githubusercontent.com/UMass-Bio/Linux-Setup-Scripts/main/etc/ssh/ssh_config.d/10-custom.conf | sudo tee /etc/ssh/ssh_config.d/10-custom.conf > /dev/null
 sudo chmod 644 /etc/ssh/ssh_config.d/10-custom.conf
 sudo mkdir -p /etc/systemd/system/sshd.service.d/
 sudo chmod 755 /etc/systemd/system/sshd.service.d/
@@ -63,7 +63,7 @@ sudo systemctl restart sshd
 # Security kernel settings
 unpriv curl -s https://raw.githubusercontent.com/secureblue/secureblue/live/files/system/etc/modprobe.d/blacklist.conf | sudo tee /etc/modprobe.d/server-blacklist.conf > /dev/null
 sudo chmod 644 /etc/modprobe.d/server-blacklist.conf
-unpriv curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/sysctl.d/99-server.conf | sudo tee /etc/sysctl.d/99-server.conf > /dev/null
+unpriv curl -s https://raw.githubusercontent.com/UMass-Bio/Linux-Setup-Scripts/main/etc/sysctl.d/99-server.conf | sudo tee /etc/sysctl.d/99-server.conf > /dev/null
 sudo chmod 644 /etc/sysctl.d/99-server.conf
 sudo dracut -f
 sudo sysctl -p
@@ -71,14 +71,14 @@ sudo sysctl -p
 sudo grubby --update-kernel=ALL --args='mitigations=auto,nosmt spectre_v2=on spectre_bhi=on spec_store_bypass_disable=on tsx=off kvm.nx_huge_pages=force nosmt=force l1d_flush=on spec_rstack_overflow=safe-ret gather_data_sampling=force reg_file_data_sampling=on random.trust_bootloader=off random.trust_cpu=off intel_iommu=on amd_iommu=force_isolation efi=disable_early_pci_dma iommu=force iommu.passthrough=0 iommu.strict=1 slab_nomerge init_on_alloc=1 init_on_free=1 pti=on vsyscall=none ia32_emulation=0 page_alloc.shuffle=1 randomize_kstack_offset=on debugfs=off lockdown=confidentiality module.sig_enforce=1 console=tty0 console=ttyS0,115200'
 
 # Disable coredump
-unpriv curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/security/limits.d/30-disable-coredump.conf | sudo tee /etc/security/limits.d/30-disable-coredump.conf > /dev/null
+unpriv curl -s https://raw.githubusercontent.com/UMass-Bio/Linux-Setup-Scripts/main/etc/security/limits.d/30-disable-coredump.conf | sudo tee /etc/security/limits.d/30-disable-coredump.conf > /dev/null
 sudo chmod 644 /etc/security/limits.d/30-disable-coredump.conf
 sudo mkdir -p /etc/systemd/coredump.conf.d
-unpriv curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/systemd/coredump.conf.d/disable.conf | sudo tee /etc/systemd/coredump.conf.d/disable.conf > /dev/null
+unpriv curl -s https://raw.githubusercontent.com/UMass-Bio/Linux-Setup-Scripts/main/etc/systemd/coredump.conf.d/disable.conf | sudo tee /etc/systemd/coredump.conf.d/disable.conf > /dev/null
 sudo chmod 644 /etc/systemd/coredump.conf.d/disable.conf
 
 # Setup DNF
-unpriv curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/dnf/dnf.conf | sudo tee /etc/dnf/dnf.conf > /dev/null
+unpriv curl -s https://raw.githubusercontent.com/UMass-Bio/Linux-Setup-Scripts/main/etc/dnf/dnf.conf | sudo tee /etc/dnf/dnf.conf > /dev/null
 sudo chmod 644 /etc/dnf/dnf.conf
 sudo sed -i 's/^metalink=.*/&\&protocol=https/g' /etc/yum.repos.d/*
 
@@ -146,7 +146,7 @@ forward-zone:
 sudo chmod 644 /etc/unbound/unbound.conf
 
 sudo mkdir -p /etc/systemd/system/unbound.service.d
-unpriv curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/systemd/system/unbound.service.d/override.conf | sudo tee /etc/systemd/system/unbound.service.d/override.conf > /dev/null
+unpriv curl -s https://raw.githubusercontent.com/UMass-Bio/Linux-Setup-Scripts/main/etc/systemd/system/unbound.service.d/override.conf | sudo tee /etc/systemd/system/unbound.service.d/override.conf > /dev/null
 sudo chmod 644 /etc/systemd/system/unbound.service.d/override.conf
 
 sudo systemctl enable --now unbound
@@ -167,7 +167,7 @@ sudo systemctl enable fstrim.timer
     echo 'UriSchemes=file;https' | sudo tee -a /etc/fwupd/fwupd.conf
     sudo systemctl restart fwupd
     mkdir -p /etc/systemd/system/fwupd-refresh.service.d
-    unpriv curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/systemd/system/fwupd-refresh.service.d/override.conf | sudo tee /etc/systemd/system/fwupd-refresh.service.d/override.conf > /dev/null
+    unpriv curl -s https://raw.githubusercontent.com/UMass-Bio/Linux-Setup-Scripts/main/etc/systemd/system/fwupd-refresh.service.d/override.conf | sudo tee /etc/systemd/system/fwupd-refresh.service.d/override.conf > /dev/null
     sudo chmod 644 /etc/systemd/system/fwupd-refresh.service.d/override.conf
     sudo systemctl daemon-reload
     sudo systemctl enable --now fwupd-refresh.timer

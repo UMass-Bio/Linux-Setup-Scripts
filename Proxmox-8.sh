@@ -26,7 +26,7 @@ output(){
 systemctl mask debug-shell.service
 
 ## Avoid phased updates
-curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/apt/apt.conf.d/99sane-upgrades | tee /etc/apt/apt.conf.d/99sane-upgrades > /dev/null
+curl -s https://raw.githubusercontent.com/UMass-Bio/Linux-Setup-Scripts/main/etc/apt/apt.conf.d/99sane-upgrades | tee /etc/apt/apt.conf.d/99sane-upgrades > /dev/null
 
 # Setup NTS
 rm -rf /etc/chrony/chrony.conf
@@ -34,7 +34,7 @@ curl -s https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/chrony.
 systemctl restart chronyd
 
 # Harden SSH
-curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/ssh/ssh_config.d/10-custom.conf | tee /etc/ssh/ssh_config.d/10-custom.conf > /dev/null
+curl -s https://raw.githubusercontent.com/UMass-Bio/Linux-Setup-Scripts/main/etc/ssh/ssh_config.d/10-custom.conf | tee /etc/ssh/ssh_config.d/10-custom.conf > /dev/null
 sudo mkdir -p /etc/systemd/system/sshd.service.d/
 sudo chmod 755 /etc/systemd/system/sshd.service.d/
 curl -s https://raw.githubusercontent.com/GrapheneOS/infrastructure/main/systemd/system/sshd.service.d/local.conf | tee /etc/systemd/system/ssh.service.d/override.conf > /dev/null
@@ -73,16 +73,16 @@ proxmox-boot-tool refresh
 
 # Kernel hardening
 curl -s https://raw.githubusercontent.com/secureblue/secureblue/live/files/system/etc/modprobe.d/blacklist.conf | tee /etc/modprobe.d/server-blacklist.conf > /dev/null
-curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/sysctl.d/99-server.conf | tee /etc/sysctl.d/99-server.conf > /dev/null
+curl -s https://raw.githubusercontent.com/UMass-Bio/Linux-Setup-Scripts/main/etc/sysctl.d/99-server.conf | tee /etc/sysctl.d/99-server.conf > /dev/null
 sysctl -p
 
 # Rebuild initramfs
 update-initramfs -u
 
 # Disable coredump
-curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/security/limits.d/30-disable-coredump.conf | tee /etc/security/limits.d/30-disable-coredump.conf > /dev/null
+curl -s https://raw.githubusercontent.com/UMass-Bio/Linux-Setup-Scripts/main/etc/security/limits.d/30-disable-coredump.conf | tee /etc/security/limits.d/30-disable-coredump.conf > /dev/null
 mkdir -p /etc/systemd/coredump.conf.d
-curl -s https://raw.githubusercontent.com/TommyTran732/Linux-Setup-Scripts/main/etc/systemd/coredump.conf.d/disable.conf | tee /etc/systemd/coredump.conf.d/disable.conf > /dev/null
+curl -s https://raw.githubusercontent.com/UMass-Bio/Linux-Setup-Scripts/main/etc/systemd/coredump.conf.d/disable.conf | tee /etc/systemd/coredump.conf.d/disable.conf > /dev/null
 
 # Setup automatic updates
 
