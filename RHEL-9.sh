@@ -41,6 +41,8 @@ sudo systemctl restart chronyd
 sudo /usr/bin/sed -i 's/\s+nullok//g' /etc/pam.d/system-auth
 
 # Harden SSH
+unpriv curl -s https://raw.githubusercontent.com/Umass-Bio/Linux-Setup-Scripts/main/etc/ssh/sshd_config.d/10-custom.conf | sudo tee /etc/ssh/sshd_config.d/10-custom.conf > /dev/null
+sudo chmod 644 /etc/ssh/sshd_config.d/10-custom.conf
 unpriv curl -s https://raw.githubusercontent.com/UMass-Bio/Linux-Setup-Scripts/main/etc/ssh/ssh_config.d/10-custom.conf | sudo tee /etc/ssh/ssh_config.d/10-custom.conf > /dev/null
 sudo chmod 644 /etc/ssh/ssh_config.d/10-custom.conf
 sudo mkdir -p /etc/systemd/system/sshd.service.d/

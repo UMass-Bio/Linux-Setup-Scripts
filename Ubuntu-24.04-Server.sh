@@ -38,6 +38,8 @@ sudo chmod 644 /etc/chrony/chrony.conf
 sudo systemctl restart chronyd
 
 # Harden SSH
+unpriv curl -s https://raw.githubusercontent.com/Umass-Bio/Linux-Setup-Scripts/main/etc/ssh/sshd_config.d/10-custom.conf | sudo tee /etc/ssh/sshd_config.d/10-custom.conf > /dev/null
+sudo chmod 644 /etc/ssh/sshd_config.d/10-custom.conf
 unpriv curl -s https://raw.githubusercontent.com/UMass-Bio/Linux-Setup-Scripts/main/etc/ssh/ssh_config.d/10-custom.conf | sudo tee /etc/ssh/ssh_config.d/10-custom.conf > /dev/null
 sudo chmod 644 /etc/ssh/ssh_config.d/10-custom.conf
 sudo mkdir -p /etc/systemd/system/ssh.service.d/
